@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from scipy import stats
-from mlxtend.frequent_patterns import apriori, association_rules
+from mlxtend.frequent_patterns import apriori, association_rules, fpgrowth
 from sklearn.preprocessing import StandardScaler
 import plotly.express as px
 import networkx as nx
@@ -993,3 +993,49 @@ class DataVisualizer:
         plt.axis("off")
         plt.tight_layout()
         plt.show()
+
+# =========================================================
+# 5. FP-GROWTH MINER (Added for Lab 2)
+# =========================================================
+
+class FPGrowthMiner(AssociationRulesMiner):
+    """
+    A class for mining association rules using the FP-Growth algorithm.
+    Inherits from AssociationRulesMiner to reuse rule generation methods.
+    """
+
+    def __init__(self, basket_bool: pd.DataFrame):
+        """
+        Initialize the FPGrowthMiner with basket data.
+        """
+        super().__init__(basket_bool)
+
+    def mine_frequent_itemsets(
+        self,
+        min_support: float = 0.01,
+        max_len: int = None,
+        use_colnames: bool = True,
+    ) -> pd.DataFrame:
+        """
+        Mine frequent itemsets using the FP-Growth algorithm.
+        
+        Args:
+            min_support (float): The minimum support threshold.
+            max_len (int): Maximum length of the itemsets generated.
+            use_colnames (bool): If True, uses DataFrames' column names in the returned DataFrame.
+
+        Returns:
+            pd.DataFrame: DataFrame of frequent itemsets with 'support' and 'itemsets' columns.
+        """
+        # Sử dụng fpgrowth từ thư viện mlxtend thay vì apriori
+        fi = fpgrowth(
+            self.basket_bool,
+            min_support=min_support,
+            use_colnames=use_colnames,
+            max_len=max_len,
+        )
+
+        fi.sort_values(by="support", ascending=False, inplace=True)
+        self.frequent_itemsets = fi
+        return self.frequent_itemsets
+        
