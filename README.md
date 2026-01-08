@@ -1,4 +1,8 @@
-# 🛒 Market Basket Analysis - Khai phá dữ liệu bán lẻ Online
+# LAB 1 🛒 Market Basket Analysis - Khai phá dữ liệu bán lẻ Online
+**Môn học:** Khai phá dữ liệu (Data Mining)  
+**Nhóm:** 8  
+**Giảng viên:** ThS. Lê Thị Thùy Trang  
+
 
 ## 1. Giới thiệu dự án
 Dự án này áp dụng kỹ thuật **Khai phá luật kết hợp (Association Rule Mining)** với thuật toán **Apriori** trên tập dữ liệu "Online Retail".
