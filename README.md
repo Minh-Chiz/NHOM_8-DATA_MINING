@@ -9,6 +9,14 @@ Mục tiêu là tìm ra thói quen mua sắm của khách hàng (khách thườn
 - Thư viện: Pandas, Mlxtend (Apriori), Matplotlib/Seaborn.
 - Quy trình: Data Cleaning -> Basket Preparation -> Apriori Modeling.
 
+## 👥 Thành viên nhóm
+| STT | Họ và Tên | Mã Sinh Viên | Vai trò |
+|---|---|---|---|
+| 1 | Vũ Ngọc Bảo | 1771020079 | Trưởng nhóm, Code chính |
+| 2 | Nguyễn Đức Mạnh | 1771020456 | Phân tích EDA, Viết báo cáo |
+| 3 | Hoàng Minh Chí | 1771020096 | Chạy mô hình |
+| 4 | Trần Tiến Quang | 1771020569 | Viết báo cáo |
+
 ---
 
 ## 2. Kết quả phân tích (Insights)
