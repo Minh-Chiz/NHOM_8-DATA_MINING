@@ -1,156 +1,58 @@
-# Shopping Cart Analysis
+# 🛒 Market Basket Analysis - Khai phá dữ liệu bán lẻ Online
 
-Phân tích dữ liệu bán lẻ để tìm ra mối quan hệ giữa các sản phẩm thường được mua cùng nhau bằng các kỹ thuật **Association Rule Mining** (Apriori). Project triển khai pipeline đầy đủ từ xử lý dữ liệu → phân tích → khai thác luật → sinh báo cáo.
+## 1. Giới thiệu dự án
+Dự án này áp dụng kỹ thuật **Khai phá luật kết hợp (Association Rule Mining)** với thuật toán **Apriori** trên tập dữ liệu "Online Retail".
+Mục tiêu là tìm ra thói quen mua sắm của khách hàng (khách thường mua sản phẩm A sẽ mua kèm sản phẩm B), từ đó đưa ra các chiến lược kinh doanh thông minh như bán chéo (cross-selling), sắp xếp kệ hàng và tạo combo khuyến mãi.
 
----
-
-## Features
-
-- Làm sạch dữ liệu & xử lý giá trị lỗi
-- Xây dựng basket matrix (transaction × product)
-- Khai phá tập mục phổ biến (Frequent itemsets)
-- Sinh luật kết hợp (Association Rules)
-- Các chỉ số:
-  - Support
-  - Confidence
-  - Lift
-- Visualization với:
-  - bar chart
-  - scatter plot
-  - network graph
-  - interactive Plotly
-- Tự động hóa pipeline bằng **Papermill**
+**Công nghệ sử dụng:**
+- Python 3.11
+- Thư viện: Pandas, Mlxtend (Apriori), Matplotlib/Seaborn.
+- Quy trình: Data Cleaning -> Basket Preparation -> Apriori Modeling.
 
 ---
 
-## Project Structure
+## 2. Kết quả phân tích (Insights)
 
-```text
-shopping_cart_analysis/
-├── data/
-│   ├── raw/
-│   │   └── online_retail.csv
-│   └── processed/
-│       ├── cleaned_uk_data.csv
-│       ├── basket_bool.parquet
-│       └── rules_apriori_filtered.csv
-│
-├── notebooks/
-│   ├── preprocessing_and_eda.ipynb
-│   ├── basket_preparation.ipynb
-│   ├── apriori_modelling.ipynb
-│   └── runs/
-│       ├── preprocessing_and_eda_run.ipynb
-│       ├── basket_preparation_run.ipynb
-│       └── apriori_modelling_run.ipynb
-│
-├── src/
-│   └── apriori_library.py
-│
-├── run_papermill.py
-├── requirements.txt
-└── README.md
-```
+Sau khi chạy mô hình với ngưỡng `min_support=0.01` (1%) và `min_lift=1.2`, chúng tôi đã tìm ra được **[Điền số lượng]** luật kết hợp chất lượng. Dưới đây là 5 insight nổi bật nhất:
+
+### Insight 1: Bộ đôi "bất khả ly thân" (Lift cao nhất)
+- **Luật:** Khách mua `[Tên sản phẩm A]` thường mua kèm `[Tên sản phẩm B]`.
+- **Số liệu:** Confidence = [Ví dụ: 80%], Lift = [Ví dụ: 15.2].
+- **Ý nghĩa:** Mối quan hệ cực mạnh. Hầu như ai mua cái này đều mua cái kia.
+- **👉 Hành động:** Đặt hai sản phẩm này cạnh nhau trên kệ hoặc web. Không cần giảm giá cũng bán được cả hai.
+
+### Insight 2: Sản phẩm chủ lực (Support cao)
+- **Luật:** Các sản phẩm như `[Tên sản phẩm C]` xuất hiện trong [Ví dụ: 10%] tổng số đơn hàng.
+- **Ý nghĩa:** Đây là sản phẩm "quốc dân", ai cũng cần.
+- **👉 Hành động:** Đặt sản phẩm này ở trang chủ hoặc lối đi chính để thu hút traffic (khách tham quan).
+
+### Insight 3: Combo quà tặng (Category Insight)
+- **Phát hiện:** Các sản phẩm thuộc nhóm `[Ví dụ: Đồ trang trí / Túi xách]` thường được mua cùng nhau theo set.
+- **👉 Hành động:** Đóng gói thành set quà tặng (Gift Box) để tăng giá trị đơn hàng trung bình (AOV).
+
+### Insight 4: Cơ hội bán chéo (Confidence cao)
+- **Luật:** Nếu khách đã bỏ `[Sản phẩm X]` vào giỏ, có [Ví dụ: 60%] khả năng họ sẽ mua thêm `[Sản phẩm Y]`.
+- **👉 Hành động:** Khi khách xem sản phẩm X, hệ thống tự động gợi ý: "Bạn có muốn mua thêm Y với giá ưu đãi 5%?"
+
+### Insight 5: Luật ngách (Niche)
+- **Phát hiện:** Tuy `[Sản phẩm Z]` ít người mua (Support thấp), nhưng hễ mua là sẽ mua số lượng lớn hoặc mua kèm `[Sản phẩm W]` với Lift rất cao.
+- **👉 Hành động:** Gửi email marketing riêng cho nhóm khách hàng VIP chuyên mua dòng sản phẩm này.
 
 ---
 
-## Installation
+## 3. Kết luận & Đề xuất
+Dựa trên dữ liệu, cửa hàng nên tập trung vào chiến lược:
+1. **Tối ưu hiển thị:** Đưa các cặp sản phẩm có Lift > 2 về gần nhau.
+2. **Kích cầu:** Tạo combo khuyến mãi cho các sản phẩm có Confidence cao nhưng Support còn thấp.
+3. **Cá nhân hóa:** Gợi ý sản phẩm liên quan ngay tại bước thanh toán.
 
-```bash
-git clone <your_repo_url>
-cd shopping_cart_analysis
-pip install -r requirements.txt
-Data Preparation
-Đặt file gốc vào:
-```
+---
 
-```bash
-data/raw/online_retail.csv
-File output sẽ được sinh tự động vào:
-```
+## 4. Hướng dẫn chạy dự án
+Để tái lập kết quả phân tích này:
 
-```bash
-data/processed/
-```
-
-Run Pipeline (Recommended)
-Chạy toàn bộ phân tích chỉ với 1 lệnh:
-
-```bash
-python run_papermill.py
-```
-Kết quả sinh ra:
-
-```bash
-data/processed/cleaned_uk_data.csv
-data/processed/basket_bool.parquet
-data/processed/rules_apriori_filtered.csv
-notebooks/runs/apriori_modelling_run.ipynb
-```
-
-### Changing Parameters
-Các tham số có thể chỉnh trong run_papermill.py:
-
-```python
-MIN_SUPPORT=0.01
-MAX_LEN=3
-FILTER_MIN_CONF=0.3
-FILTER_MIN_LIFT=1.2
-```
-
-Hoặc sửa trong cell PARAMETERS của mỗi notebook để chạy với cấu hình khác nhau.
-
-### Visualization & Results
-Notebook 03 hiển thị các biểu đồ sau:
-
-Top luật theo Lift
-
-Top luật theo Confidence
-
-Scatter Support–Confidence–Lift
-
-Network Graph giữa các sản phẩm
-
-Biểu đồ Plotly tương tác
-
-Bạn có thể export sang HTML:
-
-```bash
-jupyter nbconvert notebooks/runs/priori_modelling_run.ipynb --to html
-```
-
-### Ứng dụng thực tế
-Product recommendation
-
-Cross-selling strategy
-
-Combo gợi ý sản phẩm
-
-Phân tích hành vi mua hàng
-
-Sắp xếp sản phẩm tại siêu thị
-
-### Tech Stack
-
-| Công nghệ | Mục đích |
-|----------|----------|
-| Python | Ngôn ngữ chính |
-| Pandas | Xử lý dữ liệu transaction |
-| MLxtend | Apriori / FP-Growth association rules |
-| Papermill | Chạy pipeline notebook tự động |
-| Matplotlib & Seaborn | Visualization biểu đồ tĩnh |
-| Plotly | Dashboard / biểu đồ tương tác |
-| Jupyter Notebook | Môi trường notebook |
-
-### Roadmap
- Thêm FP-Growth notebook (04)
-
- Streamlit dashboard để lọc luật
-
-
-### Author
-Project được thực hiện bởi:
-Trang Le
-
-📄 License
-MIT — sử dụng tự do cho nghiên cứu, học thuật và ứng dụng nội bộ.
+1. **Cài đặt môi trường:**
+   ```bash
+   conda create -n shopping_env python=3.11
+   conda activate shopping_env
+   pip install -r requirements.txt
