@@ -1,7 +1,7 @@
 # Lab 2: FP-Growth - Phân Tích Giỏ Hàng (Market Basket Analysis)
 
 **Môn học:** Khai phá dữ liệu (Data Mining)  
-**Nhóm:** 9  
+**Nhóm:** 8  
 **Giảng viên:** ThS. Lê Thị Thùy Trang  
 
 ---
