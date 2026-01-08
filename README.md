@@ -1,4 +1,4 @@
-# LAB 1 🛒 Market Basket Analysis - Khai phá dữ liệu bán lẻ Online
+# Lab 1: 🛒 Market Basket Analysis - Khai phá dữ liệu bán lẻ Online
 **Môn học:** Khai phá dữ liệu (Data Mining)  
 **Nhóm:** 8  
 **Giảng viên:** ThS. Lê Thị Thùy Trang  
