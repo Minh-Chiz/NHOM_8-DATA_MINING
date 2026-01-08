@@ -16,10 +16,11 @@ Trong bài Lab này, chúng tôi tập trung vào việc:
 
 ## 👥 Thành viên nhóm
 | STT | Họ và Tên | Mã Sinh Viên | Vai trò |
-|-----|-----------|--------------|---------|
-| 1   | [Tên bạn] | [Mã SV]      | ...     |
-| 2   | ...       | ...          | ...     |
-| 3   | ...       | ...          | ...     |
+|---|---|---|---|
+| 1 | Vũ Ngọc Bảo | 1771020079 | Trưởng nhóm, Code chính |
+| 2 | Nguyễn Đức Mạnh | 1771020456 | Phân tích EDA, Viết báo cáo |
+| 3 | Hoàng Minh Chí | 1771020096 | Chạy mô hình |
+| 4 | Trần Tiến Quang | 1771020569 | Viết báo cáo |
 
 ---
 
